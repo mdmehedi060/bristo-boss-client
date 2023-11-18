@@ -4,11 +4,16 @@ import { Helmet } from 'react-helmet-async';
 import { useContext} from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const SignUp = () => {
+  const axiosPublic=useAxiosPublic();
     const {register,handleSubmit,reset,formState: { errors }} = useForm();
     const {createUser,updateUserProfile}=useContext(AuthContext)
 const navigate=useNavigate();
+
+
     const onSubmit = (data) =>{ 
     console.log(data)
     createUser(data.email,data.password)
@@ -17,16 +22,27 @@ const navigate=useNavigate();
       console.log(loggedUser);
       updateUserProfile(data.name,data.photoURL)
       .then(()=>{
-        console.log('User Profile info Update');
+        // console.log('User Profile info Update');
+        // create user entry in database
+const userInfo={
+  name: data.name,
+  email: data.email,
+}
+axiosPublic.post('/users', userInfo)
+.then(res => {
+    if (res.data.insertedId) {
+        console.log('user added to the database')
         reset();
         Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Created Successfully",
-          showConfirmButton: false,
-          timer: 1500
+            position: 'top-end',
+            icon: 'success',
+            title: 'User created successfully.',
+            showConfirmButton: false,
+            timer: 1500
         });
-        navigate('/')
+        navigate('/');
+    }
+})
       })
       .catch(error=>console.log(error))
     })
@@ -119,7 +135,8 @@ const navigate=useNavigate();
             </div>
           </form>
           
-          <p><small>Allready Have a Account. Please <Link to="/login"> Login</Link></small></p>
+          <p className='px-10 my-6 text-xl mx-auto'><small>Allready Have a Account. Please <Link className='text-blue-600' to="/login"> Login</Link></small></p>
+       <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

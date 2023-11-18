@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import { useLocation } from 'react-router-dom';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 
 const Login = () => {
@@ -133,9 +134,11 @@ else {
               <input disabled={false} className="btn btn-primary" type="Submit" value="Login" />
             </div>
           </form>
-          <p><small>New Here? <Link to="/signup">Create a new account</Link></small></p>
+          <p className='px-10 my-6 text-2xl mx-auto'><small>New Here? Please <Link className='text-blue-600' to="/signup">SignUp</Link></small></p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
+     
     </div>
    </>
   );

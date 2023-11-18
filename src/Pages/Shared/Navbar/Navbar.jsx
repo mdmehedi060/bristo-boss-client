@@ -24,7 +24,7 @@ logOut()
      <li><Link to="/order/salad">Order Food</Link></li>
      <li><Link to="/secrate">Secrate</Link></li>
     
-     <li><Link to='/dasboard/cart'>
+     <li><Link to='/dashboard/cart'>
      <button className="btn btn-ghost">
      <FaShoppingCart className="mr-2"></FaShoppingCart>
   <div className="badge badge-secondary">+{cart.length}</div>

@@ -10,6 +10,7 @@ import PrivateRout from "./PrivateRout";
 import Secrate from "../Pages/Shared/Secrate/Secrate";
 import Dashboard from "../Layout/DashBoard/Dashboard";
 import Cart from './../Pages/Dashboard/Cart/Cart';
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 
 
 
@@ -47,12 +48,17 @@ export  const router = createBrowserRouter([
       ]
     },
     {
-      path:'/dasboard',
-      element:<Dashboard></Dashboard>,
+      path:'/dashboard',
+      element:<PrivateRout><Dashboard></Dashboard></PrivateRout>,
       children:[
         {
           path:'cart',
           element:<Cart></Cart>
+        },
+        // admin
+        {
+          path:'users',
+          element:<AllUsers></AllUsers>
         },
       ]
     },

@@ -1,49 +1,86 @@
 import { NavLink, Outlet } from "react-router-dom";
-import {  FaBookmark, FaCalendar, FaHome, FaPaypal, FaReceipt, FaSearch, FaShoppingCart } from "react-icons/fa";
+import {  FaBook, FaBookmark, FaCalendar, FaEnvelope, FaHome, FaList, FaOrcid, FaPaypal, FaReceipt, FaSearch, FaShoppingCart, FaStore, FaUsers, FaUtensils } from "react-icons/fa";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart]=useCart();
+  // TODO:get isAdmin value from the database
+  const [isAdmin] = useAdmin();
   return (
     <div className="flex">
       <div className="w-56 min-h-screen bg-orange-400">
         <ul className="menu text-2xl">
-          <li>
-            <NavLink to="/dasboard/cart">
+         {
+          isAdmin ? <>
+<li>
+                                <NavLink to="/dashboard/adminHome">
+                                    <FaHome></FaHome>
+                                    Admin Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/addItems">
+                                    <FaUtensils></FaUtensils>
+                                    Add Items</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageItems">
+                                    <FaList></FaList>
+                                    Manage Items</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/bookings">
+                                    <FaBook></FaBook>
+                                    Manage Bookings</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/users">
+                                    <FaUsers></FaUsers>
+                                    All Users</NavLink>
+                            </li>
+          </>
+          :
+          <>
+           <li>
+            <NavLink to="/dashboard/cart">
               <FaShoppingCart />
               My Cart ({cart.length})
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dasboard/userHome">
+            <NavLink to="/dashboard/userHome">
               <FaHome />
              User Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dasboard/reservation">
+            <NavLink to="/dashboard/reservation">
               <FaCalendar />
            Reservation
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dasboard/payment">
+            <NavLink to="/dashboard/payment">
               <FaPaypal />
           Payment Mathod
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dasboard/review">
+            <NavLink to="/dashboard/review">
               <FaReceipt />
           Review
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dasboard/bookings">
+            <NavLink to="/dashboard/bookings">
               <FaBookmark />
           My Bookings
             </NavLink>
           </li>
+          </>
+         }
+          {/* Shared navlinks */}
+
           <div className="divider text-black font-extrabold"></div>
           <li>
             <NavLink to="/">
@@ -52,9 +89,27 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/order/salad">
+            <NavLink to="/menu">
               <FaSearch />
-            Menu
+           Our Menu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/order/salad">
+              <FaOrcid />
+         Order Food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="secrate">
+              <FaStore />
+         Secrate
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="secrate">
+              <FaEnvelope />
+         Contract
             </NavLink>
           </li>
         </ul>
