@@ -17,3 +17,4 @@ const location =useLocation();
 };
 
 export default PrivateRout;
+
